@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const userDb = {
@@ -66,6 +67,8 @@ const ErrorM = styled.span`
 `;
 
 export const Login = () => {
+  const navigate = useNavigate();
+  // 경로 바꿔주는 역할 useNavigate()
   const {
     register,
     handleSubmit,
@@ -80,7 +83,7 @@ export const Login = () => {
     // console.log("버튼 눌렀음");
     // onsubmit이 작동하는지 검사
     const { email, password } = getValues();
-    // console.log(username, password);
+    // console.log(email, password);
     const { dbUsername, dbPw } = userDb;
     // console.log(dbUsername, dbPw);
 
@@ -94,7 +97,7 @@ export const Login = () => {
     // 아이디와 비밀번호 둘다 일치해야함 => 조건을 두개 설정
 
     if (email === dbUsername && password === dbPw) {
-      alert("로그인 되었습니다");
+      navigate("/");
     }
   };
   console.log(errors);
@@ -135,6 +138,7 @@ export const Login = () => {
                 value: 8,
                 message: "비밀번호는 8자리 이상 작성해야합니다",
               },
+              // 정규식 사용 방법(인터넷에 검색해서 쓰기)
               //   pattern: {
               //     value: /^(?=.*\d)(?=.*[a-zA-z])[0-9a-zA-z]{8,16}$/,
               //     message:
@@ -142,7 +146,7 @@ export const Login = () => {
               //   },
             })}
             type="password"
-            // 클릭했을때 텍스트로 타입변경
+            // 비밀번호 보여주기 : 클릭했을때 텍스트로 타입변경
             placeholder="비밀번호를 입력해주세요"
           ></input>
 
@@ -191,4 +195,4 @@ export const Login = () => {
 
 // 클리어에러 해보기
 // 회원가입 해보기
-// 클릭했을때 비밀번ㅇ호 보이게
+// 클릭했을때 비밀번호 보이게
